@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: db
+  name: db
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: db
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_DATABASE
+          value: wordpress
+        - name: MYSQL_PASSWORD
+          value: wordpress
+        - name: MYSQL_ROOT_PASSWORD
+          value: somewordpress
+        - name: MYSQL_USER
+          value: wordpress
+        image: mysql:5.7
+        name: db
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: db-data
+      restartPolicy: Always
+      volumes:
+      - name: db-data
+        persistentVolumeClaim:
+          claimName: db-data
+status: {}
