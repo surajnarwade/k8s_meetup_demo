@@ -1,0 +1,11 @@
+version: '2'
+services:
+  web:
+    build: .
+    image: docker.io/surajnarwade/count
+    labels:
+      kompose.service.type: nodeport
+    ports:
+     - "5000:5000"
+  redis:
+    image: "redis:alpine"

@@ -17,7 +17,7 @@ services:
        - db
      image: wordpress:latest
      labels:
-       kompose.service.type: nodeport
+       kompose.service.expose: "wordpress"
      ports:
        - "8000:80"
      restart: always
